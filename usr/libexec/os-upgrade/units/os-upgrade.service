@@ -1,0 +1,19 @@
+[Unit]
+Description=OS Upgrade service
+OnFailure=os-upgrade-failure.service
+Wants=network-online.target
+Requires=messagebus.service
+After=network.target network-online.target NetworkManager-wait-online.service systemd-networkd-wait-online.service network.service messagebus.service
+
+[Service]
+Type=exec
+Environment=OS_UPGRADE_SERVICE=1
+ExecStart=/bin/bash /usr/local/libexec/os-upgrade/os-upgrade
+TimeoutStartSec=30s
+StandardInput=tty
+StandardOutput=tty
+StandardError=tty
+TTYPath=/dev/tty@TTY_NUMBER@
+
+[Install]
+WantedBy=os-upgrade.target multi-user.target graphical.target

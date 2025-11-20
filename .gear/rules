@@ -1,0 +1,3 @@
+spec: .gear/os-upgrade.spec
+copy?: .gear/*.patch
+tar: .

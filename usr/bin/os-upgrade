@@ -1,0 +1,13 @@
+#!/bin/bash
+### This file is covered by the GNU General Public License
+### version 3 or later.
+###
+### Copyright (C) 2025, ALT Linux Team
+
+##################################
+### Entry point to the utility ###
+##################################
+
+# shellcheck source=../libexec/os-upgrade/main.sh
+. /usr/libexec/os-upgrade/main.sh
+

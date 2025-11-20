@@ -1,0 +1,4 @@
+[Unit]
+Description=OS Upgrade target
+Requires=sysinit.target network-online.target os-upgrade.service
+AllowIsolate=yes
