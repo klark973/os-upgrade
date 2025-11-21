@@ -27,7 +27,7 @@ run_stage()
 	done
 
 	# 2.6. Remove all kernels excluding the used one
-	run remove-old-kernels -f -A
+	run remove-old-kernels -f -A -B
 
 	# Mark important packages to prevent them from being deleted
 	run apt-mark manual -- ${pkgs:1}
