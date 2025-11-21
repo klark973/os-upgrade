@@ -17,10 +17,11 @@ su_init_statedir()
 	# Determine the regular user
 	if [ -z "$username" ]; then
 		v="loginctl list-users --no-pager"
-		v="$v --no-legend |grep -v -E ' root\$'"
+		v="$v --no-legend |grep -v -E ' (root|_ldm)\$'"
 		[ "$(eval "$v |wc -l")" != 1 ] && v="" ||
 			v="$(eval "$v |head -n1 |cut -f2 -d' '")"
-		username="$v"
+		[ -z "$v" ] || [ "$(id -u -- "$v")" -lt 500 ] ||
+			username="$v"
 	fi
 
 	# Reset the username if it is equal '-'
