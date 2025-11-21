@@ -385,7 +385,7 @@ su_demonize()
 		fi
 
 		v="$(date +'%Y-%m-%d')"
-		msg_bold "The program finished on @BOLD@." "$v"
+		msg_bold "The program was finished on @BOLD@." "$v"
 
 		next_target --restore
 		next_stage finished

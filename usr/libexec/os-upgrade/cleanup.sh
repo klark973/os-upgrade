@@ -119,7 +119,7 @@ if [ -n "$ima_required" ]; then
 fi
 
 # Show the last messages
-msg_bold "The program finished on @BOLD@." "$(date +'%Y-%m-%d')"
+msg_bold "The program was finished on @BOLD@." "$(date +'%Y-%m-%d')"
 msg_good "The OS Upgrade has been finished successfully!"
 
 # Delete this script itself and exit or reboot
