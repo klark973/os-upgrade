@@ -80,9 +80,6 @@ if [ -z "$OS_UPGRADE_SERVICE" ]; then
 	[ -n "$ping_server" ] ||
 		msg_warn "The network connection check was skipped."
 	msg "The program will be restarted as a service very soon."
-
-	# Delete the temporary log: it's empty anyway
-	run rm -f "/var/log/$progname-err.log"
 else
 	# User verification
 	[ "$EUID" = 0 ] ||
@@ -104,6 +101,7 @@ else
 	# Environment
 	export LANG=C
 	export LC_ALL=C
+	export DURING_INSTALL=
 
 	# Check the status
 	read_state_var stage

@@ -77,8 +77,6 @@ SU_VERSION="%version"
 SU_BUILD_DATE="$(date -u +'%%Y-%%m-%%d')"
 
 EOF
-mkdir -p -- ".%_logdir"
-:> ".%_logdir/%name-err.log"
 sed -i -e "s/@TTY_NUMBER@/%_tty_number/g" \
 	  "./usr/libexec/%name/units/%name.service" \
 	  "./usr/libexec/%name/defaults.sh" \
@@ -88,7 +86,7 @@ chmod 0755 check-scripts.sh
 
 %install
 mkdir -p -m 0755 -- "%buildroot"
-cp -aRf usr var "%buildroot"/
+cp -aRf usr "%buildroot"/
 
 %check
 ./check-scripts.sh
@@ -101,20 +99,9 @@ echo "There is no supported distribution for updating!" >&2
 exit 1
 %endif
 
-# Autorun with some defaults
-%if "%altbranch" == "c10f1"
-%post
-# Immediately start the utility in the background
-if [ "$1" = 1 ] && [ -z "${DURING_INSTALL-}" ]; then
-	nohup /bin/bash "%_bindir/%name" --autoclean --background \
-		--color=always --verbose >"%_logdir/%name-err.log" 2>&1 &
-fi
-%endif
-
 %files
 %_bindir/%name
 /usr/libexec/%name
-%ghost %_logdir/%name-err.log
 %doc CHANGELOG.md LICENSE doc/*.md
 
 %changelog
