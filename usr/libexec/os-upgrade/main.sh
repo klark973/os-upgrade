@@ -61,10 +61,10 @@ if [ -z "$OS_UPGRADE_SERVICE" ]; then
 	export DURING_INSTALL=
 
 	# Use branch-specific defaults
+	eval "save_${branch}_data() { :; }"
 	# shellcheck source=/dev/null
 	[ ! -s "$libdir/$branch"/defaults.sh ] ||
 		. "$libdir/$branch"/defaults.sh
-	eval "save_${branch}_data() { :; }"
 	stage="${stage:-start}"
 	setup_console
 
