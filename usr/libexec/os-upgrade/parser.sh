@@ -10,10 +10,10 @@
 
 parse_cmdline()
 {
-	local l_opts="apt:,autoclean,background,color:,disable-ima,enable-ima"
-	      l_opts="$l_opts,force,important:,logfile:,mirror:,ping:,reboot:"
-	      l_opts="$l_opts,show,username:,verbose,version,help"
-	local s_opts="+A:abc:defi:l:m:p:r:su:Vvh"
+	local l_opts="apt:,background,color:,disable-ima,enable-ima,force,yes"
+	      l_opts="$l_opts,important:,keep-package,logfile:,mirror:,ping:"
+	      l_opts="$l_opts,quiet,reboot:,show,username:,version,help"
+	local s_opts="+a:bc:defi:kl:m:p:qr:su:Vh"
 	local msg
 
 	l_opts=$(getopt -n "$progname" -o "$s_opts" -l "$l_opts" -- "$@") ||
@@ -21,7 +21,7 @@ parse_cmdline()
 	eval set -- "$l_opts"
 	while [ "$#" != 0 ]; do
 		case "$1" in
-		-A|--apt)
+		-a|--apt)
 			check_2nd_arg --apt "${2-}" \
 				"path to additional APT sources"
 			msg="The specified APT sources list not found: '%s'."
@@ -29,10 +29,6 @@ parse_cmdline()
 				show_usage "$msg" "$2"
 			apt_sources="$(realpath -- "$2")"
 			shift
-			;;
-
-		-a|--autoclean)
-			autoclean=1
 			;;
 
 		-b|--background)
@@ -59,7 +55,7 @@ parse_cmdline()
 			enable_ima=1
 			;;
 
-		-f|--force)
+		-f|--force|--yes)
 			batchmode=1
 			;;
 
@@ -68,6 +64,10 @@ parse_cmdline()
 				"a list of important packages"
 			veto_packages="$2"
 			shift
+			;;
+
+		-k|--keep-package)
+			autoclean=
 			;;
 
 		-l|--logfile)
@@ -93,6 +93,10 @@ parse_cmdline()
 			[ "x$2" = 'x-' ] && ping_server="" ||
 				ping_server="$2"
 			shift
+			;;
+
+		-q|--quiet)
+			verbose=
 			;;
 
 		-r|--reboot)
@@ -122,10 +126,6 @@ parse_cmdline()
 			fi
 			username="$2"
 			shift
-			;;
-
-		-v|--verbose)
-			verbose=1
 			;;
 
 		-V|--version)

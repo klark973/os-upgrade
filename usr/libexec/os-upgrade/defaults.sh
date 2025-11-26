@@ -33,7 +33,7 @@ batchmode=
 apt_sources=
 
 # 1: delete the os-upgrade package itself after the update
-autoclean=
+autoclean=1
 
 # 1: do not use isolated systemd targets if possible
 background=
@@ -84,7 +84,7 @@ last_stage=
 no_reboot=
 
 # 1: show all the details of the performing operations
-verbose=
+verbose=1
 
 # The specified TTY number
 TTY_NUMBER=@TTY_NUMBER@
