@@ -15,21 +15,20 @@ su_init_statedir()
 	local v
 
 	# Determine the regular user
-	if [ -z "$username" ]; then
-		v="loginctl list-users --no-pager"
-		v="$v --no-legend |grep -v -E ' (root|_ldm)\$'"
+	if [ "$username" = AUTO ]; then
+		v="loginctl --no-pager --no-legend"
+		v="$v list-users |grep -v -E ' (root|_ldm)\$'"
 		[ "$(eval "$v |wc -l")" != 1 ] && v="" ||
 			v="$(eval "$v |head -n1 |cut -f2 -d' '")"
-		[ -z "$v" ] || [ "$(id -u -- "$v")" -lt 500 ] ||
+		if [ -n "$v" ] && [ "$(id -u -- "$v")" -ge 500 ]; then
 			username="$v"
+		else
+			username=
+		fi
 	fi
 
-	# Reset the username if it is equal '-'
-	if [ "x$username" = "x-" ]; then
-		username=
-
 	# Make the log readable by the regular user
-	elif [ -n "$username" ]; then
+	if [ -n "$username" ]; then
 		v="$(run id -ng -- "$username")"
 		msg_diag "%s" "$v"
 		run chgrp -- "$v" "$logfile"

@@ -117,7 +117,7 @@ parse_cmdline()
 				"username who is allowed to track progress"
 			[ "$EUID" = 0 ] ||
 				show_usage "You can't use '--username='."
-			if [ "x$2" != "x-" ]; then
+			if [ "$2" != AUTO ]; then
 				id -- "$2" >/dev/null 2>&1 ||
 					show_usage "Unknown user: '%s'." "$2"
 				[ "$2" != 0 ] && [ "$2" != root ] &&

@@ -33,10 +33,10 @@ Options:
                      update has already been completed, the entire log will be
                      shown, otherwise only the latest entries are shown, new
                      entries are displayed interactively.
-  -u, --username=    Allow the specified user to monitor the progress of
-                     the execution. By default, the user will be identified
-                     automatically. To allow only root to monitor progress,
-                     specify a minus sign as the name (--username="-").
+  -u, --username=    Allow the specified user to monitor the progress of the
+                     execution. By default, the log and all files are accessible
+                     only to the root user. When specifying --username=AUTO,
+                     the regular user is identified automatically.
   -V, --version      Show the version of this program and exit.
   -h, --help         Show this help message and exit.
 
