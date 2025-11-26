@@ -26,6 +26,9 @@ reboot_delay=10
 # The URL pointing to the selected mirror
 mirror=
 
+# 1: do not ask the user for confirmation of the update
+batchmode=
+
 # Additional APT sources list to be used after switching to the target branch
 apt_sources=
 

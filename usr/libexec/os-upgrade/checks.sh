@@ -47,8 +47,8 @@ check_requirements()
 		# shellcheck source=./c10f1/checks.sh
 		. "$libdir/$branch"/checks.sh
 
-		# Branch-specific checks
-		if check_$branch
+		# Branch-specific checks and show the last warning
+		if check_$branch && ask_user_agree
 		then
 			# Check a network connectivity
 			check_network ||
@@ -80,6 +80,28 @@ read_release_field()
 	printf "%s" "$x"
 }
 
+# Prompts the user to confirm the update
+#
+ask_user_agree()
+{
+	local lang prompt
+
+	[ -z "$batchmode" ] ||
+		return 0
+	lang="${LC_ALL:-en_US.utf8}"
+	lang="${LC_MESSAGES:-$lang}"
+	lang="${LANG:-$lang}"
+	lang="${lang%.*}"
+	[ -n "$lang" ] ||
+		lang=en_US
+	prompt="$libdir/l10n/$lang/prompt.msg"
+	[ -s "$prompt" ] ||
+		prompt="$libdir/l10n/en_US/prompt.msg"
+	cat <"$prompt"
+	read -rs -n1 prompt ||:
+	printf "\n"
+}
+
 # Checks the network connection
 #
 check_network()
@@ -89,7 +111,7 @@ check_network()
 	if [ -n "$ping_server" ]; then
 		tmpf="$(mktemp -qt -- "$progname-XXXXXXXX.tmp")" ||
 			fatal "Couldn't create a temporary file."
-		ping -c4 -W10 -- "$ping_server" 2>&1 |
+		LANG=C ping -c4 -W10 -- "$ping_server" 2>&1 |
 			tee -- "$tmpf"
 		grep -qs -- ', 0% packet loss,' "$tmpf" ||
 			rc=1

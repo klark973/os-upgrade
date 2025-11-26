@@ -11,9 +11,9 @@
 parse_cmdline()
 {
 	local l_opts="apt:,autoclean,background,color:,disable-ima,enable-ima"
-	      l_opts="$l_opts,important:,logfile:,mirror:,ping:,reboot:"
+	      l_opts="$l_opts,force,important:,logfile:,mirror:,ping:,reboot:"
 	      l_opts="$l_opts,show,username:,verbose,version,help"
-	local s_opts="+A:abc:dei:l:m:p:r:su:Vvh"
+	local s_opts="+A:abc:defi:l:m:p:r:su:Vvh"
 	local msg
 
 	l_opts=$(getopt -n "$progname" -o "$s_opts" -l "$l_opts" -- "$@") ||
@@ -57,6 +57,10 @@ parse_cmdline()
 
 		-e|--enable-ima)
 			enable_ima=1
+			;;
+
+		-f|--force)
+			batchmode=1
 			;;
 
 		-i|--important)

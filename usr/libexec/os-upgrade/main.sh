@@ -49,16 +49,16 @@ if [ -z "$OS_UPGRADE_SERVICE" ]; then
 
 	parse_cmdline "$@"
 
-	# Environment
-	export LANG=C
-	export LC_ALL=C
-	export DURING_INSTALL=
-
 	# shellcheck source=./checks.sh
 	. "$libdir"/checks.sh
 
 	# Determine the source branch name
 	check_requirements
+
+	# Environment
+	export LANG=C
+	export LC_ALL=C
+	export DURING_INSTALL=
 
 	# Use branch-specific defaults
 	# shellcheck source=/dev/null

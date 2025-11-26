@@ -15,6 +15,7 @@ Options:
                      if it was enabled before the update started.
   -e, --enable-ima   Enable IMA/EVM protection after the update,
                      even if it was turned off before the update.
+  -f, --force        Don't ask for confirmation of the update, just do it.
   -i, --important=   Prohibit accidental removal of the listed packages during
                      cleaning operations. Package names are separated by commas.
                      Before cleaning, these packages will be marked as manually
