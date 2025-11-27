@@ -33,7 +33,7 @@ run_stage()
 	$lines >"$log" 2>&1 &
 	pid="$!"
 	#
-	( local fmt="(%s lines) complete..."
+	( local fmt="(%s lines) complete...   "
 
 	  # Show a line of initial results
 	  fmt="\r${CLR_BOLD}%s ${CLR_LC1}%s${CLR_NORM} $fmt"
