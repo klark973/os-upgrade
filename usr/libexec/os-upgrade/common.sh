@@ -345,7 +345,7 @@ su_exit()
 	run systemctl -i reboot || {
 		will_run reboot -fp
 		# Suppress the output, otherwise it damages the log
-		reboot -fp >/dev/null 2>&1
+		exec reboot -fp >/dev/null 2>&1
 		exit 1
 	}
 }
