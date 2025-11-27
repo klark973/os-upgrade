@@ -8,7 +8,7 @@
 - new parameter `-k` or `--keep-package`
 - new parameter `-q` or `--quiet`
 - a request to the user to confirm the update
-- a screenshot of the c10f1 update
+- some screenshots of the c10f1 update
 
 ### Fixed
 
