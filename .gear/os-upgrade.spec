@@ -78,9 +78,8 @@ SU_BUILD_DATE="$(date -u +'%%Y-%%m-%%d')"
 
 EOF
 sed -i -e "s/@TTY_NUMBER@/%_tty_number/g" \
-	  "./usr/libexec/%name/units/%name.service" \
 	  "./usr/libexec/%name/defaults.sh" \
-	  "./doc/README-ru.md"
+	  "./usr/libexec/%name/units/%name.service"
 chmod 0755 ".%_bindir/%name"
 chmod 0755 check-scripts.sh
 
