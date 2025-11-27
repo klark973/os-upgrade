@@ -19,7 +19,7 @@
 %endif
 
 Name: os-upgrade
-Version: 1.1
+Version: 1.2
 Release: alt1
 
 Summary: The Operation System Upgrade Tool
@@ -101,9 +101,19 @@ exit 1
 %files
 %_bindir/%name
 /usr/libexec/%name
-%doc CHANGELOG.md LICENSE doc/*.md
+%doc CHANGELOG.md LICENSE doc/*.md doc/*.png
 
 %changelog
+* Thu Nov 27 2025 Leonid Krivoshein <klark@altlinux.org> 1.2-alt1
+- Changed some default values and command line parameters.
+- Changed the default behavior of the argument --username=.
+- Updated and improved the package documentation and help.
+- Removed os-upgrade autorun from the spec's %%post.
+- Removed legacy parameters --verbose and --autoclean.
+- Added a request to the user to confirm the update.
+- Added parameters --force, --keep-package and --quiet.
+- Added some screenshots of the c10f1 update.
+
 * Sat Nov 22 2025 Leonid Krivoshein <klark@altlinux.org> 1.1-alt1
 - Fix scripts to update c10f1 -> c10f2.
 - Pack /var/log/os-upgrade-err.log.
